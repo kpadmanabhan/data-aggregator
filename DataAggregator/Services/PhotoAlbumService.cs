@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using DataAggregator.Model;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace DataAggregator.Services
 {
@@ -81,7 +82,7 @@ namespace DataAggregator.Services
                 if (response.IsSuccessStatusCode)
                 {
                     string data = await response.Content.ReadAsStringAsync();
-                    return JsonSerializer.Deserialize<List<T>>(data);
+                    return JsonConvert.DeserializeObject<List<T>>(data);
                 }
 
                 _logger.LogError("Internal server error");
